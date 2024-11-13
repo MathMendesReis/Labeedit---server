@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,11 +16,13 @@ public abstract class AbstractEntitie {
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
   private UUID id;
-  @CreationTimestamp
+  @UpdateTimestamp
   private LocalDateTime updateDate;
   @CreationTimestamp
   private LocalDateTime createdDate;
-
+  public UUID getId() {
+    return id;
+  }
 
   LocalDateTime getUpdateDate(){
     return this.updateDate;
