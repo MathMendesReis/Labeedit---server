@@ -1,6 +1,5 @@
 package com.mendes.Labeedit.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -33,6 +32,7 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(PERMIT_ALL_LIST).permitAll()
+                        .requestMatchers("/v1/user/sing-in").permitAll()
                         .anyRequest().authenticated())
                 .build();
     }
