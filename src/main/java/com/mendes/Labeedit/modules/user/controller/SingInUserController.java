@@ -8,26 +8,27 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mendes.Labeedit.modules.user.dto.SingInDTO;
 import com.mendes.Labeedit.modules.user.entities.AppUser;
 import com.mendes.Labeedit.modules.user.repository.AppUserRepositorie;
 
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import jakarta.validation.Valid;
+
 @RestController
-@RequestMapping("v1/users")
-public class RegisterUserController {
+@RequestMapping("v1/user/sing-in")
+public class SingInUserController {
 private AppUserRepositorie appUserRepositorie;
 private BCryptPasswordEncoder encoder;
- @Value("${api.security.token.secret}")
-  private String secret;
-	public RegisterUserController(AppUserRepositorie appUserRepositorie,BCryptPasswordEncoder encoder) {
+
+	public SingInUserController(AppUserRepositorie appUserRepositorie,BCryptPasswordEncoder encoder) {
 		this.appUserRepositorie = appUserRepositorie;
     this.encoder = encoder;
   }
 
-  @PostMapping("register")
-  public ResponseEntity<?> handle(){
-        var userExists = appUserRepositorie.findByEmail("noel@gmail.com");
-        System.out.println(this.secret);
-
+  @PostMapping()
+  public ResponseEntity<?> handle(@Valid @RequestBody SingInDTO singInDTO){
+        var userExists = appUserRepositorie.findByEmail(singInDTO.getEmail());
         if(userExists.isPresent()){
           return new ResponseEntity<>("Email já registrado", HttpStatus.CONFLICT);
         }
