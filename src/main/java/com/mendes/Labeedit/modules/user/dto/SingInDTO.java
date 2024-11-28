@@ -1,8 +1,8 @@
 package com.mendes.Labeedit.modules.user.dto;
 
 public class SingInDTO {
-  String email;
-  String password;
+  private String email;
+  private String password;
 
   public SingInDTO(String email,String password){
     this.email = email;
@@ -15,7 +15,7 @@ public class SingInDTO {
   public String getEmail(){
     return this.email;
   }
-  public String getPassword(){
+  public  String getPassword(){
     return this.password;
   }
 }
