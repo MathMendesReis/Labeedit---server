@@ -19,7 +19,9 @@ public class SecurityConfig {
         "/swagger-ui/**",
         "/v1/api-docs/**",
         "/swagger-resource/**",
-        "/actuator/**"
+        "/actuator/**",
+        "/v1/user/sing-in",
+        "v1/user/sing-up/email"
     };
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
@@ -32,7 +34,6 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(PERMIT_ALL_LIST).permitAll()
-                        .requestMatchers("/v1/user/sing-in").permitAll()
                         .anyRequest().authenticated())
                 .build();
     }
