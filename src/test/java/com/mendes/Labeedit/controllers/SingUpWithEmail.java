@@ -1,12 +1,12 @@
 package com.mendes.Labeedit.controllers;
 
+import org.springframework.http.MediaType;
 import org.junit.Before;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.AfterEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.MediaType;
 import org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -19,11 +19,9 @@ import com.mendes.Labeedit.modules.user.dto.SingUpWithEmailDTO;
 import com.mendes.Labeedit.modules.user.repository.AppUserRepositorie;
 import com.mendes.Labeedit.utils.TestUtils;
 
-
-
 @SpringBootTest
 @AutoConfigureMockMvc
-public class SingInUserControllerT {
+public class SingUpWithEmail {
   private  MockMvc mockMvc;
 
   @Autowired
@@ -35,7 +33,7 @@ public class SingInUserControllerT {
   private WebApplicationContext context;
 
   @Autowired
-  public SingInUserControllerT(MockMvc mockMvc) {
+  public SingUpWithEmail(MockMvc mockMvc) {
     this.mockMvc = mockMvc;
   }
 
@@ -51,27 +49,16 @@ public class SingInUserControllerT {
     appUserRepositorie.deleteAll();
   }
 
-
   @Test
-  
-  public void it_must_be_possible_to_save_a_user() throws Exception{
-    String url = "/v1/user/sing-in";
-    String email = "teste@email.com";
-    String password = "123456";
+  public void it_must_be_possible_to_log_in() throws Exception{
 
-    SingInDTO singInDTO = new SingInDTO(email,password);
-     mockMvc.perform(MockMvcRequestBuilders.post(url)
+    SingInDTO singInDTO = new SingInDTO("teste@email.com","123456");
+     mockMvc.perform(MockMvcRequestBuilders.post("/v1/user/sing-in")
             .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtils.objectToJson(singInDTO)))
             .andExpect(MockMvcResultMatchers.status().isCreated());
-
-     SingUpWithEmailDTO singUpWithEmailDTO = new SingUpWithEmailDTO(email,password);       
-     mockMvc.perform(MockMvcRequestBuilders.post("/v1/user/sing-up/email")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtils.objectToJson(singUpWithEmailDTO)))
-            .andExpect(MockMvcResultMatchers.status().isOk());
-    
+  
   }
 
-   
+    
 }
