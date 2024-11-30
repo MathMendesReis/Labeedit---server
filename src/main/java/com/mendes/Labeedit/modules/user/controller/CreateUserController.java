@@ -17,7 +17,7 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("v1/user/sing-in")
-public class SingInUserController {
+public class CreateUserController {
   @Autowired
   private AppUserRepositorie appUserRepositorie;
   @Autowired

@@ -24,13 +24,13 @@ public abstract class AbstractEntitie {
     return id;
   }
 
-  LocalDateTime getUpdateDate(){
+  public LocalDateTime getUpdateDate(){
     return this.updateDate;
   }
-  LocalDateTime getCreatedDate(){
+  public LocalDateTime getCreatedDate(){
     return this.createdDate;
   }
-  void setCreatedDate(LocalDateTime createdDate){
+  public void setCreatedDate(LocalDateTime createdDate){
     this.createdDate = createdDate;
   }
   

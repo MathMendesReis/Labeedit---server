@@ -61,8 +61,8 @@ private String secretKey;
           .withClaim("roles", roles)
           .withExpiresAt(expiresIn)
           .sign(algorithm); 
-      return new ResponseEntity<>(token, HttpStatus.OK);
-   } catch (Exception e) {
+          return new ResponseEntity<>(String.format("Bearer %s", token), HttpStatus.OK);
+        } catch (Exception e) {
     // TODO: handle exception
     return ResponseEntity.badRequest().body(e.getMessage());
    }
