@@ -12,7 +12,9 @@ import com.mendes.Labeedit.exceptions.UserFoundException;
 import com.mendes.Labeedit.modules.posts.dto.request.RegisterPostRequestDTO;
 import com.mendes.Labeedit.modules.posts.entities.PostEntitie;
 import com.mendes.Labeedit.modules.posts.repository.PostRepositorie;
+import com.mendes.Labeedit.modules.posts.useCases.CreateUserPostUseCase;
 import com.mendes.Labeedit.modules.user.repository.AppUserRepositorie;
+import com.mendes.Labeedit.utils.ApiRoutes;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
@@ -20,24 +22,16 @@ import jakarta.validation.Valid;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("v1/posts")
+@RequestMapping(ApiRoutes.POSTS_BASE)
 public class CreateUserPostController {
   @Autowired
-  private PostRepositorie postRepositorie;
+  private CreateUserPostUseCase createUserPostUseCase;
 
-  @Autowired
-  private AppUserRepositorie appUserRepositorie;
-  @PostMapping("/register")
+  @PostMapping()
   public ResponseEntity<?> handle(@Valid @RequestBody RegisterPostRequestDTO registerPostRequestDTO,HttpServletRequest request) {
     try {
-        var appUserId = request.getAttribute("app_user_id");
-
-        var user = this.appUserRepositorie.findById(UUID.fromString(appUserId.toString()))
-        .orElseThrow(() -> {
-            throw new UserFoundException();
-        });
-        PostEntitie postEntitie = new PostEntitie(UUID.fromString(user.getId().toString()),registerPostRequestDTO.getContent());
-        this.postRepositorie.save(postEntitie);
+        var userId = request.getAttribute("app_user_id").toString();
+        this.createUserPostUseCase.execute(userId, registerPostRequestDTO);
         return new ResponseEntity<>(HttpStatus.CREATED);
       } catch (Exception e) {
         return ResponseEntity.badRequest().body(e.getMessage());
