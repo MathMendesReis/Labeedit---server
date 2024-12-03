@@ -27,7 +27,7 @@ public class SecurityAppUserFilter extends OncePerRequestFilter {
       throws ServletException, IOException {
     // SecurityContextHolder.getContext().setAuthentication(null);
     String header = request.getHeader("Authorization");
-    if (request.getRequestURI().startsWith(ApiRoutes.POSTS_BASE)) {
+    if (request.getRequestURI().startsWith(ApiRoutes.POSTS_BASE) | request.getRequestURI().startsWith(ApiRoutes.REACT_BASE)) {
       if(header != null){
         var token = jwtProvider.validateToken(header);
         if (token == null) {

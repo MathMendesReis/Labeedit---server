@@ -13,6 +13,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.mendes.Labeedit.modules.user.dto.SingUpWithEmailDTO;
 import com.mendes.Labeedit.modules.user.repository.AppUserRepositorie;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,6 +41,8 @@ private String secretKey;
     this.encoder = encoder;
   }
   @PostMapping()
+    @Tag(name = "Auth", description = "Autentificação via email e senha")
+
   public ResponseEntity<?> handle(@Valid @RequestBody SingUpWithEmailDTO SingUpWithEmailDTO) {
    try {
         var user = this.appUserRepositorie.findByEmail(SingUpWithEmailDTO.getEmail()).orElseThrow(()-> {

@@ -3,6 +3,8 @@ package com.mendes.Labeedit.modules.user.entities;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.mendes.Labeedit.utils.AbstractEntitie;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -10,6 +12,8 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "app_users")
 public class AppUser extends AbstractEntitie{
+
+  @Schema(example = "Daniel de Souza", requiredMode = RequiredMode.REQUIRED, description = "Nome do candidato")
   @Column(nullable = false)
   private String name;
   @Column(unique = true, nullable = false)

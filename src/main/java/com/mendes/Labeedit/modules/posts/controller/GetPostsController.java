@@ -14,7 +14,17 @@ import org.springframework.web.bind.annotation.RestController;
 import com.mendes.Labeedit.modules.posts.dto.response.FindAllPostDTOResponse;
 import com.mendes.Labeedit.modules.posts.entities.PostEntitie;
 import com.mendes.Labeedit.modules.posts.repository.PostRepositorie;
+import com.mendes.Labeedit.modules.user.entities.AppUser;
 import com.mendes.Labeedit.utils.ApiRoutes;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 import java.util.List;
 @RestController
@@ -25,6 +35,15 @@ public class GetPostsController {
   private PostRepositorie postRepositorie;
 
   @GetMapping()
+  @Operation(summary = "Listagens de todos os posts", description = "Essa função é responsável por listar todos os posts.")
+  @ApiResponses({
+      @ApiResponse(responseCode = "200", content = {
+          @Content(array = @ArraySchema(schema = @Schema(implementation = FindAllPostDTOResponse.class)))
+
+      }),
+     
+  })
+  @Tag(name = "Posts", description = "Listagens de posts")
   public ResponseEntity<?> handle(
     @RequestParam(defaultValue = "0") int page,
     @RequestParam(defaultValue = "5") int size
