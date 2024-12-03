@@ -15,7 +15,7 @@
 
 </div>
 
-<h2 id="rodar projeto" align="center" >Como rodar o projeto?</h2>
+<h2 id="rodar-projeto" align="center" >Como rodar o projeto?</h2>
 
 <h3>Com docker: </h3>
 
