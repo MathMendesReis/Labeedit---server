@@ -57,9 +57,10 @@ public class SingInUserControllerT {
   public void it_must_be_possible_to_save_a_user() throws Exception{
     String url = "/v1/user/sing-in";
     String email = "teste@email.com";
+    String name = "teste";
     String password = "123456";
 
-    SingInDTO singInDTO = new SingInDTO(email,password);
+    SingInDTO singInDTO = new SingInDTO(email,password,name);
      mockMvc.perform(MockMvcRequestBuilders.post(url)
             .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtils.objectToJson(singInDTO)))

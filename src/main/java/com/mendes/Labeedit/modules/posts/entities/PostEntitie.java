@@ -3,10 +3,8 @@ package com.mendes.Labeedit.modules.posts.entities;
 import com.mendes.Labeedit.modules.user.entities.AppUser;
 import com.mendes.Labeedit.utils.AbstractEntitie;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
@@ -20,13 +18,34 @@ public class PostEntitie  extends AbstractEntitie{
   @JoinColumn(name = "user_id", insertable = false, updatable = false)
   private AppUser user;
 
+  public AppUser getUser() {
+    return user;
+  }
   @Column(name = "user_id", nullable = false)
   private UUID userId;
 
+  public UUID getUserId() {
+    return userId;
+  }
   private String content;
+  public String getContent() {
+    return content;
+  }
   private int likes;
+  public void setLikes(int likes) {
+    this.likes = likes;
+  }
+  public int getLikes() {
+    return likes;
+  }
   private int dislikes;
 
+  public void setDislikes(int dislikes) {
+    this.dislikes = dislikes;
+  }
+  public int getDislikes() {
+    return dislikes;
+  }
   public PostEntitie(){}
   public PostEntitie(UUID userId,String content){
     this.userId = userId;
@@ -38,11 +57,3 @@ public class PostEntitie  extends AbstractEntitie{
 
 
 }
-/* private userId: string,
-		private userName: string,
-		private contents: string,
-		private creation_date: string,
-		private information_update: string,
-		private likes: number,
-		private dislikes: number,
-		private coments: number */

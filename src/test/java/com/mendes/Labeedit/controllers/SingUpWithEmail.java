@@ -15,7 +15,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.mendes.Labeedit.modules.user.dto.SingInDTO;
-import com.mendes.Labeedit.modules.user.dto.SingUpWithEmailDTO;
 import com.mendes.Labeedit.modules.user.repository.AppUserRepositorie;
 import com.mendes.Labeedit.utils.TestUtils;
 
@@ -52,7 +51,7 @@ public class SingUpWithEmail {
   @Test
   public void it_must_be_possible_to_log_in() throws Exception{
 
-    SingInDTO singInDTO = new SingInDTO("teste@email.com","123456");
+    SingInDTO singInDTO = new SingInDTO("teste@email.com","123456","teste");
      mockMvc.perform(MockMvcRequestBuilders.post("/v1/user/sing-in")
             .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtils.objectToJson(singInDTO)))
