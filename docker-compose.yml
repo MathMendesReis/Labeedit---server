@@ -1,6 +1,6 @@
 services:
   api:
-    image: api-labeedit-:v1
+    image: api-labeedit:latest
     ports:
       - 8080:8080
     depends_on:
